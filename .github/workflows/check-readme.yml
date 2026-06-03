@@ -19,7 +19,7 @@ jobs:
       - name: Verify Name in README
         run: |
           NAME="gquadri2"
-          README_PATH="https://github.com/gquadri2/ilovegit/README.md"
+          README_PATH="README.md"
           
           if grep -qi "$NAME" "$README_PATH"; then
             echo "✅ Check passed: The name '$NAME' is present in $README_PATH."
