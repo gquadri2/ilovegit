@@ -1,0 +1,30 @@
+name: Check README for Name
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  verify-readme:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Checks-out repository under $GITHUB_WORKSPACE
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 2. Checks if the name exists inside README.md
+      - name: Verify Name in README
+        run: |
+          NAME="Giada"
+          
+          # Search for the name in the file (case-insensitive using -i)
+          if grep -qi "$NAME" README.md; then
+            echo "✅ Check passed: The name '$NAME' is present in README.md."
+          else
+            echo "❌ ERROR: README.md does not contain the name '$NAME'."
+            echo "This workflow will fail and block the merge if required."
+            exit 1
+          fi
